@@ -1,7 +1,7 @@
 {
-  "name": "heart-spade-sdet-assessment",
+  "name": "francism-sdet-assessment",
   "version": "1.0.0",
-  "description": "Junior SDET Take-Home Assessment for Heart and Spade Ventures",
+  "description": "Junior SDET Take-Home Assessment for Heart and Spade Ventures - Francis Mesina",
   "scripts": {
     "test": "npx playwright test",
     "test:headed": "npx playwright test --headed",
@@ -15,6 +15,6 @@
     "typescript": "^5.0.0"
   },
   "dependencies": {
-    "dotenv": "^16.3.1"
+    "dotenv": "^16.6.1"
   }
 }
