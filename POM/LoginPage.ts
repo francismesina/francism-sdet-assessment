@@ -14,10 +14,10 @@ export class LoginPage {
     this.page = page;
     this.usernameInput = page.locator('input[name="username"]');
     this.passwordInput = page.locator('input[name="password"]');
-    this.loginButton = page.locator('button[type="submit"]');
+    this.loginButton = page.locator('input[type="submit"][value="Login"]');
     this.errorMessage = page.locator('.error, .alert-danger, [data-testid="error"]');
-    this.welcomeMessage = page.locator('.success, .welcome, [data-testid="welcome"]');
-    this.logoutButton = page.locator('button:has-text("Logout")');
+    this.welcomeMessage = page.locator('h1:has-text("Welcome")');
+    this.logoutButton = page.locator('a[href="/logout"], text=Logout');
     this.pageTitle = page.locator('h1, h2').first();
   }
 
@@ -26,9 +26,14 @@ export class LoginPage {
   }
 
   async login(username: string, password: string) {
+    await this.usernameInput.waitFor({ state: 'visible', timeout: 5000 });
+    await this.passwordInput.waitFor({ state: 'visible', timeout: 5000 });
+    await this.loginButton.waitFor({ state: 'visible', timeout: 5000 });
     await this.usernameInput.fill(username);
     await this.passwordInput.fill(password);
+    await this.page.screenshot({ path: 'test-results/login-form-filled.png' }); // Debug screenshot
     await this.loginButton.click();
+    await this.page.waitForTimeout(1000); // Wait for page to update after login
   }
 
   async getErrorMessage(): Promise<string> {

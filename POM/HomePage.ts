@@ -11,8 +11,9 @@ export class HomePage {
   constructor(page: Page) {
     this.page = page;
     this.mainHeading = page.locator('h1').first();
-    this.searchButton = page.locator('[aria-label="Search"]');
-    this.searchInput = page.locator('input[placeholder*="Search docs"]');
+    // Updated search locators for Playwright docs site
+    this.searchButton = page.locator('.DocSearch-Button, [class*="search"]').first();
+    this.searchInput = page.locator('.DocSearch-Input, input[placeholder*="Search"], input[type="search"]').first();
     this.footer = page.locator('footer');
     this.getStartedButton = page.locator('text="Get started"').first();
   }
@@ -31,6 +32,7 @@ export class HomePage {
 
   async searchFor(searchTerm: string) {
     await this.clickSearch();
+    await this.page.waitForTimeout(1000); // Wait for search modal to open
     await this.searchInput.fill(searchTerm);
     await this.searchInput.press('Enter');
   }

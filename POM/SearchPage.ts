@@ -9,9 +9,10 @@ export class SearchPage {
 
   constructor(page: Page) {
     this.page = page;
-    this.searchResults = page.locator('[data-testid="search-result"]');
-    this.searchInput = page.locator('input[type="search"]');
-    this.locatorsLink = page.locator('a[href*="/docs/locators"]');
+    // Updated selectors for Playwright docs search
+    this.searchResults = page.locator('.DocSearch-Hit, [data-testid="search-result"], .search-result').first();
+    this.searchInput = page.locator('.DocSearch-Input, input[type="search"]');
+    this.locatorsLink = page.locator('a[href*="/docs/locators"], .DocSearch-Hit a:has-text("Locators")').first();
     this.pageTitle = page.locator('h1');
   }
 
